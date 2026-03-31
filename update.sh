@@ -46,7 +46,7 @@ fi
 
 # Останавливаем сервис
 echo -e "${YELLOW}Останавливаем сервис...${NC}"
-sudo systemctl stop $SERVICE_NAME
+systemctl stop $SERVICE_NAME
 
 # Сохраняем .env
 cp .env .env.backup
@@ -71,7 +71,7 @@ npm run build
 
 # Запускаем сервис
 echo -e "${YELLOW}Запускаем сервис...${NC}"
-sudo systemctl start $SERVICE_NAME
+systemctl start $SERVICE_NAME
 
 # Ждём запуска и отправляем уведомление в Root
 sleep 3
@@ -83,4 +83,4 @@ curl -s -X POST http://localhost:3000/notify \
 
 echo -e "${GREEN}=== Обновление завершено! ===${NC}"
 echo -e "Версия: ${LATEST:0:7}"
-echo -e "Логи:   ${YELLOW}sudo journalctl -u ${SERVICE_NAME} -f${NC}"
+echo -e "Логи:   ${YELLOW}journalctl -u ${SERVICE_NAME} -f${NC}"
