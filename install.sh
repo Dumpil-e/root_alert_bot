@@ -101,9 +101,9 @@ SyslogIdentifier=${SERVICE_NAME}
 WantedBy=multi-user.target
 EOF
 
-sudo systemctl daemon-reload
-sudo systemctl enable $SERVICE_NAME
-sudo systemctl restart $SERVICE_NAME
+systemctl daemon-reload
+systemctl enable $SERVICE_NAME
+systemctl restart $SERVICE_NAME
 
 echo -e "${GREEN}=== Установка завершена! ===${NC}"
 echo -e "Директория:  ${YELLOW}${INSTALL_DIR}${NC}"
