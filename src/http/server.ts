@@ -9,9 +9,6 @@ export function startHttpServer() {
 
     app.post("/zabbix", authMiddleware, handleZabbix);
 
-    const port = 3000;
-    app.listen(port, () => console.log(`Listening on port ${port}`));
-
     app.post("/notify", (req, res, next) => {
         if (req.ip !== "127.0.0.1" && req.ip !== "::1") {
             res.status(403).send("Forbidden");
@@ -20,5 +17,6 @@ export function startHttpServer() {
         next();
     }, handleNotify);
 
+    const port = 3000;
+    app.listen(port, () => console.log(`Listening on port ${port}`));
 }
-
