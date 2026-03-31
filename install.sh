@@ -78,7 +78,7 @@ npm run build
 echo -e "${YELLOW}Настраиваем systemd сервис...${NC}"
 CURRENT_USER=$(whoami)
 
-sudo tee /etc/systemd/system/${SERVICE_NAME}.service > /dev/null <<EOF
+tee /etc/systemd/system/${SERVICE_NAME}.service > /dev/null <<EOF
 [Unit]
 Description=Well Alert Bot
 After=network.target
