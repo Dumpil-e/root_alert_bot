@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.env
+.crashed
+rootsdk.sqlite3
+tsconfig.tsbuildinfo
