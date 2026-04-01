@@ -10,8 +10,8 @@ NC='\033[0m'
 # === НАСТРОЙКИ — менять только здесь ===
 REPO="https://github.com/Dumpil-e/root_alert_bot.git"
 BRANCH="main"
-INSTALL_DIR="/opt/well_alert_bot"
-SERVICE_NAME="well_alert_bot"
+INSTALL_DIR="/opt/root_alert_bot"
+SERVICE_NAME="root_alert_bot"
 # =======================================
 
 echo -e "${GREEN}=== Well Alert Bot installer ===${NC}"

@@ -7,10 +7,10 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-SERVICE_NAME="well_alert_bot"
+SERVICE_NAME="root_alert_bot"
 BRANCH="main"
 
-echo -e "${GREEN}=== Well Alert Bot updater ===${NC}"
+echo -e "${GREEN}=== Root Alert Bot updater ===${NC}"
 
 # Проверка что мы в git репозитории
 if [ ! -d ".git" ]; then
