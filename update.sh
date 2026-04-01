@@ -37,6 +37,9 @@ echo -e "Новая:   ${LATEST:0:7}"
 echo -e "\nИзменения:"
 git log --oneline $CURRENT..origin/$BRANCH
 
+# Сохраняем список изменений для уведомления
+CHANGES=$(git log --oneline $CURRENT..origin/$BRANCH | head -10)
+
 # Подтверждение
 read -p "Обновить? (y/n): " confirm
 if [ "$confirm" != "y" ]; then
@@ -69,7 +72,6 @@ if [ -f "config.json.backup" ]; then
     cp config.json.backup config.json
     rm config.json.backup
 else
-    # config.json не было — создаём из примера
     echo -e "${YELLOW}Создаём config.json из примера...${NC}"
     cp config.example.json config.json
     echo -e "${RED}Заполни config.json перед использованием:${NC}"
@@ -94,7 +96,7 @@ systemctl start $SERVICE_NAME
 sleep 3
 curl -s -X POST http://localhost:3000/notify \
     -H "Content-Type: application/json" \
-    -d "{\"message\": \"🔄 Бот обновлён.\nБыло: ${CURRENT:0:7}\nСтало: ${LATEST:0:7}\"}" \
+    -d "{\"message\": \"🔄 Бот обновлён.\nБыло: ${CURRENT:0:7}\nСтало: ${LATEST:0:7}\nИзменения:\n${CHANGES}\"}" \
     && echo -e "${GREEN}Уведомление отправлено в Root${NC}" \
     || echo -e "${YELLOW}Не удалось отправить уведомление в Root${NC}"
 
