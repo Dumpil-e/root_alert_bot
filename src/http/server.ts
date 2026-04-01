@@ -18,7 +18,14 @@ export function startHttpServer() {
     app.post("/zabbix", authMiddleware, handleZabbix);
 
     app.post("/notify", (req, res, next) => {
-        if (req.ip !== "127.0.0.1" && req.ip !== "::1") {
+        const ip = req.ip || "";
+        const isLocalhost =
+            ip === "127.0.0.1" ||
+            ip === "::1" ||
+            ip === "::ffff:127.0.0.1" ||
+            ip.includes("127.0.0.1");
+
+        if (!isLocalhost) {
             res.status(403).send("Forbidden");
             return;
         }
