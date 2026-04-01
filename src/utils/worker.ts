@@ -13,6 +13,8 @@ async function processQueue(): Promise<void> {
     const messages = getPending();
     if (messages.length === 0) return;
 
+    console.log(`Queue size: ${messages.length}`);
+
     for (const msg of messages) {
         try {
             const text = msg.attempts > 0

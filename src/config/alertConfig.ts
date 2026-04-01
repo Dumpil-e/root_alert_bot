@@ -21,7 +21,13 @@ function loadConfig(): Config {
     }
 
     const raw = fs.readFileSync(configPath, "utf-8");
-    return JSON.parse(raw) as Config;
+
+    try {
+        return JSON.parse(raw) as Config;
+    } catch (err) {
+        console.error("config.json is invalid JSON!", err);
+        process.exit(1);
+    }
 }
 
 export const config = loadConfig();
