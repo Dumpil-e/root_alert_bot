@@ -66,6 +66,17 @@ if [ -z "$DEV_TOKEN" ] || [ -z "$ZABBIX_SECRET" ]; then
     exit 1
 fi
 
+# Проверка config.json
+if [ ! -f "config.json" ]; then
+    echo -e "${YELLOW}Создаём config.json из примера...${NC}"
+    cp config.example.json config.json
+    echo -e "${RED}Заполни config.json:${NC}"
+    echo -e "  ${YELLOW}nano ${INSTALL_DIR}/config.json${NC}"
+    echo -e "${RED}Затем запусти снова:${NC}"
+    echo -e "  ${YELLOW}${INSTALL_DIR}/install.sh${NC}"
+    exit 1
+fi
+
 # Установка зависимостей
 echo -e "${YELLOW}Устанавливаем зависимости...${NC}"
 npm install
@@ -87,7 +98,7 @@ After=network.target
 Type=simple
 User=${CURRENT_USER}
 WorkingDirectory=${INSTALL_DIR}
-ExecStart=${PROJECT_DIR}/node_modules/.bin/rootsdk start devhost
+ExecStart=${INSTALL_DIR}/node_modules/.bin/rootsdk start devhost
 Restart=on-failure
 RestartSec=5s
 StartLimitIntervalSec=60s
@@ -107,6 +118,6 @@ systemctl restart $SERVICE_NAME
 
 echo -e "${GREEN}=== Установка завершена! ===${NC}"
 echo -e "Директория:  ${YELLOW}${INSTALL_DIR}${NC}"
-echo -e "Статус:      ${YELLOW}sudo systemctl status ${SERVICE_NAME}${NC}"
-echo -e "Логи:        ${YELLOW}sudo journalctl -u ${SERVICE_NAME} -f${NC}"
+echo -e "Статус:      ${YELLOW}systemctl status ${SERVICE_NAME}${NC}"
+echo -e "Логи:        ${YELLOW}journalctl -u ${SERVICE_NAME} -f${NC}"
 echo -e "Обновление:  ${YELLOW}${INSTALL_DIR}/update.sh${NC}"

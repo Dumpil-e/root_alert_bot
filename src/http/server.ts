@@ -1,4 +1,4 @@
-import express from "express"
+import express from "express";
 import { handleZabbix } from "./handlers/zabbix";
 import { authMiddleware } from "./middleware/auth";
 import { handleNotify } from "./handlers/notify";

@@ -51,6 +51,11 @@ systemctl stop $SERVICE_NAME
 # Сохраняем .env
 cp .env .env.backup
 
+# Сохраняем config.json если есть
+if [ -f "config.json" ]; then
+    cp config.json config.json.backup
+fi
+
 # Обновляем код
 echo -e "${YELLOW}Обновляем код...${NC}"
 git pull origin $BRANCH
@@ -58,6 +63,18 @@ git pull origin $BRANCH
 # Восстанавливаем .env
 cp .env.backup .env
 rm .env.backup
+
+# Восстанавливаем config.json если был бекап
+if [ -f "config.json.backup" ]; then
+    cp config.json.backup config.json
+    rm config.json.backup
+else
+    # config.json не было — создаём из примера
+    echo -e "${YELLOW}Создаём config.json из примера...${NC}"
+    cp config.example.json config.json
+    echo -e "${RED}Заполни config.json перед использованием:${NC}"
+    echo -e "  ${YELLOW}nano $(pwd)/config.json${NC}"
+fi
 
 # Обновляем зависимости если изменился package.json
 if git diff $CURRENT HEAD -- package.json | grep -q .; then

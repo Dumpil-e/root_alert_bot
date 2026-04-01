@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
-import { sendMessage } from "../../bot/sender";
-import { CHANNELS } from "../../config/channels";
+import { sendToRoot } from "../../bot/sender";
+import { config } from "../../config/alertConfig";
+import type { ChannelGuid } from "@rootsdk/server-bot";
 
 export async function handleNotify(req: Request, res: Response): Promise<void> {
     const { message } = req.body;
@@ -10,6 +11,6 @@ export async function handleNotify(req: Request, res: Response): Promise<void> {
         return;
     }
 
-    await sendMessage(CHANNELS.general, message, "High");
+    await sendToRoot(config.channels["general"] as ChannelGuid, message, "High");
     res.send("OK");
 }

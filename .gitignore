@@ -3,4 +3,6 @@ dist/
 .env
 .crashed
 rootsdk.sqlite3
+queue.sqlite3
 tsconfig.tsbuildinfo
+config.json

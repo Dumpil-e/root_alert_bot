@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { getChannelForSeverity } from "../../bot/router";
+import { getRuleForSeverity } from "../../config/alertConfig";
 import { sendMessage } from "../../bot/sender";
 
 interface ZabbixPayload {
@@ -18,19 +18,17 @@ export async function handleZabbix(req: Request, res: Response): Promise<void> {
     const { severity, message } = req.body as ZabbixPayload;
 
     if (!severity || !message) {
-        console.warn("Missing severity or message");
         res.status(400).send("Bad Request: missing fields");
         return;
     }
 
     if (!VALID_SEVERITIES.includes(severity)) {
-        console.warn(`Unknown severity: ${severity}`);
         res.status(400).send("Bad Request: unknown severity");
         return;
     }
 
-    const channel = getChannelForSeverity(severity);
-    await sendMessage(channel, message, severity);
+    const rule = getRuleForSeverity(severity);
+    sendMessage(rule.channel, message, severity);
 
     res.send("OK");
 }

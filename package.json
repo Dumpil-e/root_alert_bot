@@ -8,10 +8,12 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@rootsdk/server-bot": "*"
+    "@rootsdk/server-bot": "*",
+    "better-sqlite3": "^12.8.0"
   },
   "devDependencies": {
     "@rootsdk/dev-tools": "*",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.6",
     "typescript": "^5.8.2"
   },
