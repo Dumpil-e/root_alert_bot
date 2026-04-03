@@ -6,7 +6,7 @@
   },
   "rules": {
     "Not classified": { "channel": "info", "mentionRoles": [] },
-    "Info": { "channel": "info", "mentionRoles": [] },
+    "Information": { "channel": "info", "mentionRoles": [] },
     "Warning": { "channel": "warning", "mentionRoles": [] },
     "Average": { "channel": "general", "mentionRoles": [] },
     "High": { "channel": "general", "mentionRoles": [] },

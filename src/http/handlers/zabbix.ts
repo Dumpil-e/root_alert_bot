@@ -8,7 +8,7 @@ interface ZabbixPayload {
 }
 
 const VALID_SEVERITIES = [
-    "Not classified", "Info", "Warning", "Average", "High", "Disaster"
+    "Not classified", "Information", "Warning", "Average", "High", "Disaster"
 ];
 
 export async function handleZabbix(req: Request, res: Response): Promise<void> {
